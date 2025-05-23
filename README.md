@@ -52,12 +52,12 @@
 </div><br>
 <div class="container" style="background-color:#FAF9F6;">
 <center><p style="font-family:Brush Script MT;font-size:50px" >Welcome to travel diaries!!</p>
-<h2>Hey guys, I am caroline and this is my travel blog page where i'll be posting about my vacation and holidays<h2></center>
+<h2>Hey there, we're a group of friends fueled by wanderlust and good vibes- welcome to our travel blog which'll guide you in every way it can to make sure you have as much fun as we did.<h2></center>
 </div>
 <br> <div class="container" style="font-size:23px;background-color:#FAF9F6;">
 My page will include : 
 <ol type="1">
-<li>My itinerary</li>
+<li>Our itinerary</li>
 <li>Must visit sceinic spots</li>
 <li>Food options</li>
 <li>Accomodation</li>
