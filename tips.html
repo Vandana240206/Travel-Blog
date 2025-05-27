@@ -2,146 +2,320 @@
 <html>
 <head>
   <title>Travel Diaries</title>
-  
-</head>
-<body>
-<style>
-    body 
-	{
-      font-family: Palatino;
-      line-height: 1.6;
-      background-color:#E6E6FA;
+  <style>
+    /* Base styles */
+    body {
+      font-family: Palatino, serif;
+      line-height: 1.9;
+      background-color: #E6E6FA;
+      margin: 0;
+      background-image: url('tips.jpg');
+      background-size: cover;
+      background-position: center;
+      background-repeat: no-repeat;
     }
-    header, footer 
-	{
+    header, footer {
       background-color: #FFB6C1;
       color: #fff;
-      padding: 20px;
+      padding: 35px;
       text-align: center;
     }
-    nav 
-	{
-      background: #D3D3D3;
+    header h1 {
+      margin: 0;
+      font-size: 2rem;
+    }
+    header h3 {
+      margin: 5px 0 0;
+      font-weight: normal;
+      font-size: 1.2rem;
+    }
+    nav {
+      background-color: #808080;
       text-align: center;
+      padding: 10px 0;
+      font-size: 20px;
+      position: relative;
     }
-    nav a 
-	{
-      color: #fff;
-      margin:50px;
+    nav a {
+      color: white;
+      margin: 0 15px;
+      text-decoration: none;
+      display: inline-block;
+      padding: 8px 15px;
+      transition: background-color 0.3s ease;
     }
-    .container
+    nav a:hover {
+      background-color: #FFB6C1;
+      color: #000;
+      border-radius: 5px;
+    }
+.container
 	{
       max-width: 1000px;
       margin: auto;     
       padding: 20px;
       background-color: #fff;
     }
-    img 
-	{
+    .search-icon {
+      cursor: pointer;
+      color: white;
+      font-size: 22px;
+      vertical-align: middle;
+      margin-left: 15px;
+    }
+    #searchInput {
+      display: none;
+      padding: 8px;
+      font-size: 16px;
+      margin-left: 10px;
+      border-radius: 5px;
+      border: none;
+      outline: none;
+      width: 200px;
+      vertical-align: middle;
+    }
+	.highlight {
+      background-color: yellow;
+      color: black;
+    }
+    #searchResults {
+      display: none;
+      background: #fff;
+      border: 1px solid #ccc;
+      margin-top: 5px;
+      max-height: 200px;
+      overflow-y: auto;
+      border-radius: 5px;
+      padding: 5px;
+      position: absolute;
+      z-index: 1001;
+      width: 300px;
+    }
+    .search-result {
+      padding: 8px;
+      border-bottom: 1px solid #eee;
+      cursor: pointer;
+      font-size: 14px;
+      color: #333;
+    }
+	.search-result:hover {
+      background-color: #f0f0f0;
+    }
+    @media (max-width: 768px) {
+      #searchResults {
+        width: 90%;
+        position: relative;
+      }
+    .container {
+      max-width: 1000px;
+      margin: 20px auto;
+      padding: 20px;
+      background-color: white;
+      border-radius: 8px;
+      box-shadow: 0 0 10px rgba(0,0,0,0.1);
+    }
+    img {
       max-width: 100%;
       height: auto;
     }
+    h1, h2 {
+      color: #333;
+    }
+    ol, ul {
+      margin-left: 20px;
+      color: #555;
+    }
+    ul[type="circle"] {
+      list-style-type: circle;
+    }
+    .highlight {
+      background-color: yellow;
+      color: black;
+    }
     
+    /* Responsive styles */
+    @media (max-width: 768px) {
+      nav {
+        font-size: 16px;
+        padding: 10px 5px;
+      }
+      nav a {
+        display: block;
+        margin: 8px 0;
+      }
+      #searchInput {
+        display: block;
+        width: 100%;
+        margin: 10px 0 0 0;
+      }
+      .container {
+        width: 95%;
+        margin: 15px auto;
+        padding: 15px;
+      }
+    }
+    @media (max-width: 480px) {
+      header h1 {
+        font-size: 1.5rem;
+      }
+      header h3 {
+        font-size: 1rem;
+      }
+      nav {
+        font-size: 14px;
+      }
+    }
   </style>
+</head>
+<body>
 <header>
   <h1>YOUR TRAVEL BUDDY</h1>
-  <a><h3>Travel blogs around INDIA</h3></a>
+  <h3><b>Travel blogs around INDIA</b></h3>
 </header>
-<body style="background-image:url(tips.jpg)">
-<div class="container" style="background-color:white;">
-<nav style="background-color:#808080;">
-  <a href="home.html" style="font-size:25px;">Home</a>
-  <a href="destinations.html" style="font-size:25px;">Destinations</a>
-  <a href="tips.html" style="font-size:25px;">Tips</a>
-  <a href="contact.html" style="font-size:25px;">Contact</a>
-</nav>
-</div><br>
 
+  <nav>
+    <a href="home check.html">Home</a>
+    <a href="destinations check.html">Destinations</a>
+    <a href="gallery check.html">Gallery</a>
+    <a href="tips check.html">Tips</a>
+    <a href="contact.html">Contact</a>
+    <span class="search-icon" onclick="toggleSearch()">🔍</span>
+    <input type="text" id="searchInput" placeholder="Search site..." onkeyup="filterContent()" />
+  </nav>
 
-<div class="container" >
- <h1>Travel Essentials Checklist</h1>
+  <div class="container" style="background-color:white;">
+    <h1>Travel Essentials Checklist</h1>
 
-  <h2>1. Documents & Money</h2>
-  <ol>
-    <li>Passport / Visa (if needed)</li>
-    <li>Government ID / Driver’s license</li>
-    <li>Travel tickets (flight, train, bus, etc.)</li>
-    <li>Hotel/hostel booking confirmations</li>
-    <li>Travel insurance</li>
-    <li>Wallet / Credit & debit cards</li>
-    <li>Some local currency (cash)</li>
-    <li>Emergency contact info</li>
-    <li>Copies (physical & digital) of important documents</li>
-  </ol>
+    <h2>1. Documents & Money</h2>
+    <ol>
+      <li>Passport / Visa (if needed)</li>
+      <li>Government ID / Driver’s license</li>
+      <li>Travel tickets (flight, train, bus, etc.)</li>
+      <li>Hotel/hostel booking confirmations</li>
+      <li>Travel insurance</li>
+      <li>Wallet / Credit & debit cards</li>
+      <li>Some local currency (cash)</li>
+      <li>Emergency contact info</li>
+      <li>Copies (physical & digital) of important documents</li>
+    </ol>
 
-  <h2>2. Clothing</h2>
-  <ol>
-    <li>Weather-appropriate outfits</li>
-    <li>Undergarments and socks</li>
-    <li>Sleepwear</li>
-    <li>Comfortable walking shoes</li>
-    <li>Flip-flops / sandals</li>
-    <li>Swimwear</li>
-    <li>Jacket / raincoat / umbrella</li>
-    <li>Sunglasses, hat, and scarf</li>
-    <li>Belt or accessories</li>
-  </ol>
+    <h2>2. Clothing</h2>
+    <ol>
+      <li>Weather-appropriate outfits</li>
+      <li>Undergarments and socks</li>
+      <li>Sleepwear</li>
+      <li>Comfortable walking shoes</li>
+      <li>Flip-flops / sandals</li>
+      <li>Swimwear</li>
+      <li>Jacket / raincoat / umbrella</li>
+      <li>Sunglasses, hat, and scarf</li>
+      <li>Belt or accessories</li>
+    </ol>
 
-  <h2>3. Toiletries</h2>
-  <ol>
-    <li>Toothbrush, toothpaste, floss</li>
-    <li>Shampoo, conditioner, soap/body wash</li>
-    <li>Face wash & moisturizer</li>
-    <li>Sunscreen & lip balm with SPF</li>
-    <li>Deodorant</li>
-    <li>Hairbrush / comb</li>
-    <li>Razor & shaving supplies</li>
-    <li>Feminine hygiene products</li>
-    <li>Small towel or travel towel</li>
-  </ol>
+    <h2>3. Toiletries</h2>
+    <ol>
+      <li>Toothbrush, toothpaste, floss</li>
+      <li>Shampoo, conditioner, soap/body wash</li>
+      <li>Face wash & moisturizer</li>
+      <li>Sunscreen & lip balm with SPF</li>
+      <li>Deodorant</li>
+      <li>Hairbrush / comb</li>
+      <li>Razor & shaving supplies</li>
+      <li>Feminine hygiene products</li>
+      <li>Small towel or travel towel</li>
+    </ol>
 
-  <h2>4. Health & Safety</h2>
-  <ol>
-    <li>Personal medications (with prescriptions)</li>
-    <li>First aid kit</li>
-    <li>Masks & hand sanitizer</li>
-    <li>Insect repellent</li>
-    <li>Water bottle</li>
-    <li>Eyeglasses / contact lenses</li>
-    <li>Travel sickness pills</li>
-  </ol>
+    <h2>4. Health & Safety</h2>
+    <ol>
+      <li>Personal medications (with prescriptions)</li>
+      <li>First aid kit</li>
+      <li>Masks & hand sanitizer</li>
+      <li>Insect repellent</li>
+      <li>Water bottle</li>
+      <li>Eyeglasses / contact lenses</li>
+      <li>Travel sickness pills</li>
+    </ol>
 
-  <h2>5. Tech & Electronics</h2>
-  <ol>
-    <li>Phone + charger</li>
-    <li>Power bank / portable charger</li>
-    <li>Headphones / earphones</li>
-    <li>Universal power adapter</li>
-    <li>Camera + memory cards</li>
-    <li>E-reader / Kindle (optional)</li>
-    <li>Laptop / tablet (if needed)</li>
-  </ol>
+    <h2>5. Tech & Electronics</h2>
+    <ol>
+      <li>Phone + charger</li>
+      <li>Power bank / portable charger</li>
+      <li>Headphones / earphones</li>
+      <li>Universal power adapter</li>
+      <li>Camera + memory cards</li>
+      <li>E-reader / Kindle (optional)</li>
+      <li>Laptop / tablet (if needed)</li>
+    </ol>
 
-  <h2>6. Other Essentials</h2>
-  <ol>
-    <li>Backpack / daypack</li>
-    <li>Packing cubes / organizers</li>
-    <li>Ziplock bags / plastic bags</li>
-    <li>Snacks (energy bars, dry fruits)</li>
-    <li>Travel pillow</li>
-    <li>Notebook + pen</li>
-    <li>Travel guidebook or offline maps</li>
-    <li>Laundry bag</li>
-  </ol>
- <h2>Pro Travel Tips</h2>
- <ul type="circle">
-<li>Always check weather before packing.</li>
-<li>Roll clothes to save space.</li>
-<li>Keep valuables in your carry-on.</li>
-<li>Back up documents online (Google Drive, email, etc.).</li>
-</ul>
+    <h2>6. Other Essentials</h2>
+    <ol>
+      <li>Backpack / daypack</li>
+      <li>Packing cubes / organizers</li>
+      <li>Ziplock bags / plastic bags</li>
+      <li>Snacks (energy bars, dry fruits)</li>
+      <li>Travel pillow</li>
+      <li>Notebook + pen</li>
+      <li>Travel guidebook or offline maps</li>
+      <li>Laundry bag</li>
+    </ol>
 
-<h2>7. Most Important of All</h2>
-<ul>
-  <li><h3>Zero Stress, only vibes.</h3></li>
-</ul>
+    <h2>Pro Travel Tips</h2>
+    <ul type="circle">
+      <li>Always check weather before packing.</li>
+      <li>Roll clothes to save space.</li>
+      <li>Keep valuables in your carry-on.</li>
+      <li>Back up documents online (Google Drive, email, etc.).</li>
+    </ul>
+  </div>
+
+  <script>
+    function toggleSearch() {
+      const input = document.getElementById("searchInput");
+      if (input.style.display === "inline-block" || input.style.display === "block") {
+        input.style.display = "none";
+        input.value = "";
+        removeHighlights();
+      } else {
+        input.style.display = window.innerWidth <= 768 ? "block" : "inline-block";
+        input.focus();
+      }
+    }
+
+    function removeHighlights() {
+      document.querySelectorAll(".highlight").forEach(el => {
+        const text = el.textContent;
+        const parent = el.parentNode;
+        parent.replaceChild(document.createTextNode(text), el);
+        parent.normalize();
+      });
+    }
+
+    function filterContent() {
+      removeHighlights();
+      const query = document.getElementById("searchInput").value.toLowerCase();
+      if (!query) return;
+
+      const walker = document.createTreeWalker(document.body, NodeFilter.SHOW_TEXT, null, false);
+      while (walker.nextNode()) {
+        const node = walker.currentNode;
+        const text = node.nodeValue.toLowerCase();
+
+        if (text.includes(query) && node.parentNode.tagName !== "SCRIPT" && node.parentNode.tagName !== "STYLE") {
+          const index = text.indexOf(query);
+          const span = document.createElement("span");
+          span.className = "highlight";
+          span.textContent = node.nodeValue.substr(index, query.length);
+
+          const before = document.createTextNode(node.nodeValue.substr(0, index));
+          const after = document.createTextNode(node.nodeValue.substr(index + query.length));
+
+          const parent = node.parentNode;
+          parent.replaceChild(after, node);
+          parent.insertBefore(span, after);
+          parent.insertBefore(before, span);
+        }
+      }
+    }
+  </script>
+</body>
+</html>
