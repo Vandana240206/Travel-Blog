@@ -2,154 +2,154 @@
 <html>
 <head>
   <title>Travel Diaries</title>
-  
-</head>
-<body>
-<style>
-    body 
-	{
+  <style>
+    body {
       font-family: Palatino;
       line-height: 1.6;
-      background-color:#E6E6FA;
+      background-color: #E6E6FA;
+      margin: 0;
     }
-    header, footer 
-	{
+    header, footer {
       background-color: #FFB6C1;
       color: #fff;
-      padding: 20px;
+      padding: 10px;
       text-align: center;
     }
-    nav 
-	{
-      background: #D3D3D3;
+    nav {
+      background-color: #808080;
       text-align: center;
+      padding: 10px 0;
+      font-size: 20px;
+      position: relative;
     }
-    nav a 
-	{
-      color: #fff;
-      margin: 50px;
+    nav a {
+       color: white;
+      margin: 0 15px;
+      text-decoration: none;
+      display: inline-block;
+      padding: 8px 12px;
+      transition: background-color 0.3s ease;
     }
-    .container
-	{
+	nav a:hover {
+      background-color: #FFB6C1;
+      color: #000;
+      border-radius: 5px;
+	  }
+    .container {
       max-width: 1000px;
       margin: auto;     
       padding: 20px;
       background-color: #fff;
     }
-    img 
-	{
+    img {
       max-width: 100%;
       height: auto;
     }
-    .tags 
-	{
+    .tags {
       color: #777;
     }
-    table 
-	{
+    table {
       width: 97%;
       border-collapse: collapse;
       margin: 10px;
     }
-    th, td 
-	{
+    th, td {
       border: 1px solid;
       padding: 8px;
     }
-    th 
-	{
+    th {
       background-color: #f2f2f2;
     }
-    input, textarea 
-	{
+    input, textarea {
       width: 97%;
       padding: 10px;
       margin-top: 10px;
       margin-bottom: 10px;
-      border: 1px solid ;
+      border: 1px solid;
     }
-    input[type="submit"] 
-	{
+    input[type="submit"] {
       background-color: #333;
       color: white;
       border: none;
       cursor: pointer;
     }
-	#searchInput {
-  display: none;
-  padding: 8px;
-  font-size: 16px;
-  margin-left: 10px;
-  border-radius: 5px;
-  border: none;
-  outline: none;
-  width: 200px;
-}
-
-.highlight {
-  background-color: yellow;
-  color: black;
-}
-
-@media (max-width: 768px) {
-  #searchInput {
-    width: 100%;
-    margin-top: 10px;
-  }
-  #searchResults {
-  display: none;
-  background: #fff;
-  border: 1px solid #ccc;
-  margin-top: 5px;
-  max-height: 200px;
-  overflow-y: auto;
-  border-radius: 5px;
-  padding: 5px;
-  position: absolute;
-  z-index: 1001;
-  width: 300px;
-}
-
-.search-result {
-  padding: 8px;
-  border-bottom: 1px solid #eee;
-  cursor: pointer;
-  font-size: 14px;
-  color: #333;
-}
-
-.search-result:hover {
-  background-color: #f0f0f0;
-}
-
-@media (max-width: 768px) {
-  #searchResults {
-    width: 90%;
-    position: relative;
-  }
-}
-
-}
+    #searchInput {
+      display: none;
+      padding: 8px;
+      font-size: 16px;
+      margin-left: 10px;
+      border-radius: 5px;
+      border: none;
+      outline: none;
+      width: 200px;
+    }
+    .highlight {
+      background-color: yellow;
+      color: black;
+    }
+    #searchResults {
+      display: none;
+      background: #fff;
+      border: 1px solid #ccc;
+      margin-top: 5px;
+      max-height: 200px;
+      overflow-y: auto;
+      border-radius: 5px;
+      padding: 5px;
+      position: absolute;
+      z-index: 1001;
+      width: 300px;
+    }
+    .search-result {
+      padding: 8px;
+      border-bottom: 1px solid #eee;
+      cursor: pointer;
+      font-size: 14px;
+      color: #333;
+    }
+    .search-result:hover {
+      background-color: #f0f0f0;
+    }
+    @media (max-width: 768px) {
+      #searchInput {
+        width: 100%;
+        margin-top: 10px;
+      }
+      #searchResults {
+        width: 90%;
+        position: relative;
+      }
+    }
+    .caption {
+      transition: all 0.3s ease;
+    }
+    img:hover + .caption {
+      font-size: 1.2em;
+      color: white;
+    }
   </style>
+</head>
+<body>
 <header>
   <h1>YOUR TRAVEL BUDDY</h1>
   <a><h3>Travel blogs around INDIA</h3></a>
 </header>
 
-<div class="container" style="background-color:white;">
+
 <nav style="background-color:#808080;font-size:20px;">
-  <a href="home.html">Home</a>
-  <a href="destinations.html">Destinations</a>
-  <a href="Gallery.html">Gallery</a>
-  <a href="tips.html">Tips</a>
+  <a href="home check.html">Home</a>
+  <a href="destinations check.html">Destinations</a>
+  <a href="gallery check.html">Gallery</a>
+  <a href="tips check.html">Tips</a>
   <a href="contact.html">Contact</a>
-    <span class="search-icon" onclick="toggleSearch()">🔍</span>
-  <input type="text" id="searchInput" placeholder="Search images..." onkeyup="filterImages()">
+  <span class="search-icon" onclick="toggleSearch()">🔍</span>
+  <input type="text" id="searchInput" placeholder="Search site..." onkeyup="filterContent()">
 </nav>
-</div><br>
+<div id="searchResults"></div>
+<br>
 
 <div class="container">
-
+  <!-- Articles and content remain the same -->
   <article>
     <h2>Exploring UDAIPUR</h2>
     <img src="udaipur.jpg">
@@ -157,7 +157,7 @@
     <p class="tags">Tags: <a href="https://www.viator.com/en-IN/blog/Udaipur/d5106/How-to-Spend-3-Days-in-Udaipur/i8163">#udaipur</a>,
  	<a href="https://www.incredibleindia.gov.in/en/rajasthan">#rajasthan</a>
 
-     <h3>Itinerary:</h3>
+    <h3>Itinerary:</h3>
     <table align="center">
     <tr align="center"><td><b>DAYS</b></td><td><b>PLACES TO VISIT</b></td><td><b>RESTAURANTS NEAR BY </b></td></tr>
     <tr align="center"><td rowspan="3" align="center" >1</td><td><a href="https://en.wikipedia.org/wiki/Lake_Pichola"><i>Lake Pichola</i></a></td><td><a href="https://en.wikipedia.org/wiki/Lake_Pichola"> Baradari Restaurant</a></td></tr>
@@ -172,7 +172,6 @@
 <tr align="center"><td><a href="https://www.incredibleindia.gov.in/en/rajasthan/udaipur/saheliyon-ki-bari"><i>Saheliyon Ki Bari</i></a></td><td><a href="https://www.tripadvisor.in/Restaurant_Review-g297672-d2082222-Reviews-Navidya_Restaurant-Udaipur_Udaipur_District_Rajasthan.html">Navidya Restaurant</a></td></tr>
 <tr align="center"><td><a href="https://en.wikipedia.org/wiki/Monsoon_Palace"><i>Monsoon Palace</i></a></td><td><a href="https://www.tripadvisor.in/Restaurant_Review-g297672-d1657546-Reviews-Tehkhana_Restaurant_Bar-Udaipur_Udaipur_District_Rajasthan.html">Tehkhana Restaurant</a></td></tr>
     </table>
-
 
     <h3>Leave a Comment</h3>
     <form>
@@ -220,7 +219,6 @@
       <input type="submit" value="Post Comment">
     </form>
   </article>
-
 </div>
 
 <footer>
@@ -288,7 +286,6 @@
       }
     }
 
-    // Display results
     if (matches.length > 0) {
       resultsContainer.style.display = "block";
       matches.forEach(match => {
