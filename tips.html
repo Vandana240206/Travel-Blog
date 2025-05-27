@@ -267,55 +267,8 @@
       <li>Back up documents online (Google Drive, email, etc.).</li>
     </ul>
   </div>
-
-  <script>
-    function toggleSearch() {
-      const input = document.getElementById("searchInput");
-      if (input.style.display === "inline-block" || input.style.display === "block") {
-        input.style.display = "none";
-        input.value = "";
-        removeHighlights();
-      } else {
-        input.style.display = window.innerWidth <= 768 ? "block" : "inline-block";
-        input.focus();
-      }
-    }
-
-    function removeHighlights() {
-      document.querySelectorAll(".highlight").forEach(el => {
-        const text = el.textContent;
-        const parent = el.parentNode;
-        parent.replaceChild(document.createTextNode(text), el);
-        parent.normalize();
-      });
-    }
-
-    function filterContent() {
-      removeHighlights();
-      const query = document.getElementById("searchInput").value.toLowerCase();
-      if (!query) return;
-
-      const walker = document.createTreeWalker(document.body, NodeFilter.SHOW_TEXT, null, false);
-      while (walker.nextNode()) {
-        const node = walker.currentNode;
-        const text = node.nodeValue.toLowerCase();
-
-        if (text.includes(query) && node.parentNode.tagName !== "SCRIPT" && node.parentNode.tagName !== "STYLE") {
-          const index = text.indexOf(query);
-          const span = document.createElement("span");
-          span.className = "highlight";
-          span.textContent = node.nodeValue.substr(index, query.length);
-
-          const before = document.createTextNode(node.nodeValue.substr(0, index));
-          const after = document.createTextNode(node.nodeValue.substr(index + query.length));
-
-          const parent = node.parentNode;
-          parent.replaceChild(after, node);
-          parent.insertBefore(span, after);
-          parent.insertBefore(before, span);
-        }
-      }
-    }
-  </script>
+<centre><h1>MOST IMPORTANT OF ALL</h1></centre>
+	<ul>
+	<li>ZERO STRESS, ONLY VIBES.</li></ul>
 </body>
 </html>
