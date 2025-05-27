@@ -1,37 +1,172 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
-    <meta charset="UTF-8">
-    <title>Roots and Routes - Travel Diaries</title>
-    <link rel="stylesheet" href="styles.css">
-</head>
-<body>
-    <nav style="background-color:#808080;font-size:20px;">
+  <title>Travel Diaries</title>
+  <style>
+    body {
+      font-family: Palatino;
+      line-height: 1.6;
+      background-color: #E6E6FA;
+      margin: 0;
+    }
+    header, footer  {
+      background-color: #FFB6C1;
+      color: #fff;
+      padding: 10px;
+      text-align: center;
+    }
+    nav {
+      background-color: #808080;
+      text-align: center;
+      padding: 10px 0;
+      font-size: 20px;
+      position: relative;
+    }
+    nav a {
+       color: white;
+      margin: 0 15px;
+      text-decoration: none;
+      display: inline-block;
+      padding: 8px 12px;
+      transition: background-color 0.3s ease;
+    }
+	nav a:hover {
+      background-color: #FFB6C1;
+      color: #000;
+      border-radius: 5px;
+	  }
+    .container {
+      max-width: 1000px;
+      margin: auto;     
+      padding: 20px;
+      background-color: #fff;
+    }
+    img {
+      max-width: 100%;
+      height: auto;
+    }
+    .tags {
+      color: #777;
+    }
+    table {
+      width: 97%;
+      border-collapse: collapse;
+      margin: 10px;
+    }
+    th, td {
+      border: 1px solid;
+      padding: 8px;
+    }
+    th {
+      background-color: #f2f2f2;
+    }
+    input, textarea {
+      width: 97%;
+      padding: 10px;
+      margin-top: 10px;
+      margin-bottom: 10px;
+      border: 1px solid;
+    }
+    input[type="submit"] {
+      background-color: #333;
+      color: white;
+      border: none;
+      cursor: pointer;
+    }
+    #searchInput {
+      display: none;
+      padding: 8px;
+      font-size: 16px;
+      margin-left: 10px;
+      border-radius: 5px;
+      border: none;
+      outline: none;
+      width: 200px;
+    }
+    .highlight {
+      background-color: yellow;
+      color: black;
+    }
+    #searchResults {
+      display: none;
+      background: #fff;
+      border: 1px solid #ccc;
+      margin-top: 5px;
+      max-height: 200px;
+      overflow-y: auto;
+      border-radius: 5px;
+      padding: 5px;
+      position: absolute;
+      z-index: 1001;
+      width: 300px;
+    }
+    .search-result {
+      padding: 8px;
+      border-bottom: 1px solid #eee;
+      cursor: pointer;
+      font-size: 14px;
+      color: #333;
+    }
+    .search-result:hover {
+      background-color: #f0f0f0;
+    }
+    @media (max-width: 768px) {
+      #searchInput {
+        width: 100%;
+        margin-top: 10px;
+      }
+      #searchResults {
+        width: 90%;
+        position: relative;
+      }
+    }
+
+}
+  </style>
+  </head>
+<body style="background-image:url('lavender.jpg')">
+
+<header>
+  <h1>YOUR TRAVEL BUDDY</h1>
+  <h3>Travel blogs around INDIA</h3>
+</header>
+
+<nav >
   <a href="home.html">Home</a>
   <a href="destinations.html">Destinations</a>
   <a href="gallery.html">Gallery</a>
   <a href="tips.html">Tips</a>
   <a href="contact.html">Contact</a>
-  <span class="search-icon" onclick="toggleSearch()">🔍</span>
-  <input type="text" id="searchInput" placeholder="Search site..." onkeyup="filterContent()">
-</nav>
+    <span class="search-icon" onclick="toggleSearch()">🔍</span>
+  <input type="text" id="searchInput" placeholder="Search images..." onkeyup="filterImages()">
+</nav><br>
 
-    <main>
-      <div class="welcome-box">
-        <h1>Welcome to Travel Diaries!!</h1>
-        <p>Hey there, we're a bunch of friends chasing sunsets and stories-welcome to our travel blog page.</p></div>
+<div class="container" style="background-color:#FAF9F6;">
+<center><p style="font-family:Brush Script MT;font-size:50px" >Welcome to travel diaries!!</p>
+<h2>Hey there, we're a bunch of friends chasing sunsets and stories-welcome to our travel blog page.<h2></center>
+</div>
+<br> <div class="container" style="font-size:23px;background-color:#FAF9F6;">
+My page will include : 
+<ol type="1">
+<li>My itinerary</li>
+<li>Must visit sceinic spots</li>
+<li>Food options</li>
+<li>Accomodation</li>
 
-        <div class="box">
-            <p align="left"><strong>Our page will include:</strong></p>
-            <ol align="left">
-                <li>Our itinerary</li>
-                <li>Must visit scenic spots</li>
-                <li>Food options</li>
-                <li>Accommodation</li>
-                </ol>
-        </div>
+</ol> 
+<center><p style="font-family:Brush Script MT;font-size:50px" >Hope you have as much fun exploring this page as we did living it!</p>
+</div><br>
 
-        <h4 class="footer-note" align="centre">Hope you have as much fun exploring this page as we did living it!</h4>
-    </main>
+<nav>
+  <a href="home.html" style="font-size:25px;">Home</a>
+  <a href="destinations.html" style="font-size:25px;">Destinations</a>
+  <a href="tips.html" style="font-size:25px;">Tips</a>
+  <a href="contacts.html" style="font-size:25px;">Contact</a>
+    <span class="search-icon" onclick="toggleSearch()">🔍</span>
+  <input type="text" id="searchInput" placeholder="Search images..." onkeyup="filterImages()">
+</nav><br>
+
 </body>
 </html>
+
+  
