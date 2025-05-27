@@ -66,11 +66,14 @@
 </header>
 
 <div class="container" style="background-color:white;">
-<nav style="background-color:#808080;">
-  <a href="home.html" style="font-size:25px;">Home</a>
-  <a href="destinations.html" style="font-size:25px;">Destinations</a>
-  <a href="tips.html" style="font-size:25px;">Tips</a>
-  <a href="contact.html" style="font-size:25px;">Contact</a>
+<nav style="background-color:#808080;font-size:20px;">
+  <a href="home.html">Home</a>
+  <a href="destinations.html">Destinations</a>
+  <a href="gallery.html">Gallery</a>
+  <a href="tips.html">Tips</a>
+  <a href="contact.html">Contact</a>
+  <span class="search-icon" onclick="toggleSearch()">🔍</span>
+  <input type="text" id="searchInput" placeholder="Search site..." onkeyup="filterContent()">
 </nav>
 </div><br>
 <body>
