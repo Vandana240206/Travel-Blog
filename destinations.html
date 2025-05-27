@@ -2,7 +2,8 @@
 <html>
 <head>
   <title>Travel Diaries</title>
-  </head>
+  
+</head>
 <body>
 <style>
     body 
@@ -74,31 +75,89 @@
       border: none;
       cursor: pointer;
     }
+	#searchInput {
+  display: none;
+  padding: 8px;
+  font-size: 16px;
+  margin-left: 10px;
+  border-radius: 5px;
+  border: none;
+  outline: none;
+  width: 200px;
+}
+
+.highlight {
+  background-color: yellow;
+  color: black;
+}
+
+@media (max-width: 768px) {
+  #searchInput {
+    width: 100%;
+    margin-top: 10px;
+  }
+  #searchResults {
+  display: none;
+  background: #fff;
+  border: 1px solid #ccc;
+  margin-top: 5px;
+  max-height: 200px;
+  overflow-y: auto;
+  border-radius: 5px;
+  padding: 5px;
+  position: absolute;
+  z-index: 1001;
+  width: 300px;
+}
+
+.search-result {
+  padding: 8px;
+  border-bottom: 1px solid #eee;
+  cursor: pointer;
+  font-size: 14px;
+  color: #333;
+}
+
+.search-result:hover {
+  background-color: #f0f0f0;
+}
+
+@media (max-width: 768px) {
+  #searchResults {
+    width: 90%;
+    position: relative;
+  }
+}
+
+}
   </style>
 <header>
   <h1>YOUR TRAVEL BUDDY</h1>
-  <a><h2>Travel blogs around INDIA.</h2></a>
+  <a><h3>Travel blogs around INDIA</h3></a>
 </header>
 
 <div class="container" style="background-color:white;">
-<nav style="background-color:#808080;">
-  <a href="home.html" style="font-size:27px;">Home</a>
-  <a href="destinations.html" style="font-size:27px;">Destinations</a>
-  <a href="tips.html" style="font-size:27px;">Tips</a>
-  <a href="contact.html" style="font-size:27px;">Contact</a>
+<nav style="background-color:#808080;font-size:20px;">
+  <a href="home.html">Home</a>
+  <a href="destinations.html">Destinations</a>
+  <a href="Gallery.html">Gallery</a>
+  <a href="tips.html">Tips</a>
+  <a href="contact.html">Contact</a>
+    <span class="search-icon" onclick="toggleSearch()">🔍</span>
+  <input type="text" id="searchInput" placeholder="Search images..." onkeyup="filterImages()">
 </nav>
 </div><br>
 
 <div class="container">
 
   <article>
-    <h2><i>Exploring UDAIPUR!</i></h2>
+    <h2>Exploring UDAIPUR</h2>
     <img src="udaipur.jpg">
-    <p>Udaipur is a city of rich cultural heritage.It is famously called "The city of Lakes", established by Raja Udai Singh the 2nd.</p>
+    <p>Udaipur is a city of rich cultural heritage.It is the city of lakes which was established by Raja Udai Singh the 2nd.</p>
     <p class="tags">Tags: <a href="https://www.viator.com/en-IN/blog/Udaipur/d5106/How-to-Spend-3-Days-in-Udaipur/i8163">#udaipur</a>,
- 	<a href="https://www.incredibleindia.gov.in/en/rajasthan">#rajasthan</a>,<a href="https://www.andbeyond.com/destinations/asia/india/north-india/rajasthan/udaipur/">#cityoflakes</a>
+ 	<a href="https://www.incredibleindia.gov.in/en/rajasthan">#rajasthan</a>
 
-    <h3>Itinerary:</h3>
+     <h3>Itinerary:</h3>
     <table align="center">
     <tr align="center"><td><b>DAYS</b></td><td><b>PLACES TO VISIT</b></td><td><b>RESTAURANTS NEAR BY </b></td></tr>
     <tr align="center"><td rowspan="3" align="center" >1</td><td><a href="https://en.wikipedia.org/wiki/Lake_Pichola"><i>Lake Pichola</i></a></td><td><a href="https://en.wikipedia.org/wiki/Lake_Pichola"> Baradari Restaurant</a></td></tr>
@@ -114,6 +173,7 @@
 <tr align="center"><td><a href="https://en.wikipedia.org/wiki/Monsoon_Palace"><i>Monsoon Palace</i></a></td><td><a href="https://www.tripadvisor.in/Restaurant_Review-g297672-d1657546-Reviews-Tehkhana_Restaurant_Bar-Udaipur_Udaipur_District_Rajasthan.html">Tehkhana Restaurant</a></td></tr>
     </table>
 
+
     <h3>Leave a Comment</h3>
     <form>
       <label for="name1">Name:</label>
@@ -127,7 +187,7 @@
   </article>
   
   <article>
-    <h2><i>Relaxing in Gods own country "KERALA"</i></h2>
+    <h2>Relaxing in Gods own country "KERALA"</h2>
     <img src="kerala.jpg">
     <p>Kerala is among the top 50 must-visit destinations on the Earth. This is due to beaches,
 	backwaters, lakes, mountain ranges, waterfalls, ancient ports, palaces, religious institutions, 
@@ -135,7 +195,7 @@
     <p class="tags">Tags: <a href="https://www.keralatourism.org/">Kerala</a>, <a href="https://www.tripadvisor.in/Attractions-g297631-Activities-c61-t52-Kerala.html">#BeachLife</a>, 
 	<a href="https://www.keralatourism.org/destination/hills/">#Nature</a>, <a href="https://www.keralaboatstay.com/">#BoatHouses</a></p>
 
-   <h3>Itinerary:</h3>
+   <h3>Itinerary</h3>
     <table align="center">
     <tr align="center"><td><b>DAYS</b></td><td><b>PLACES TO VISIT</b></td><td><b>RESTAURANTS NEAR BY </b></td></tr>
     <tr align="center"><td rowspan="6" align="center" > <b>Munnar</b> </br> 1 & 2</td><td><a href="https://g.co/kgs/HChzsJC"><i>Tea gardens</i></a></td><td><a href="https://maps.app.goo.gl/kV82TyRMDjBoUkMp8">KTDC Restaurant</a></td></tr>
@@ -166,6 +226,83 @@
 <footer>
   <p>&copy; 2025 Travel Diaries. All rights reserved.</p>
 </footer>
+
+<script>
+  function toggleSearch() {
+    const input = document.getElementById("searchInput");
+    const results = document.getElementById("searchResults");
+    input.style.display = input.style.display === "inline-block" ? "none" : "inline-block";
+    results.style.display = "none";
+    input.focus();
+  }
+
+  function removeHighlights() {
+    document.querySelectorAll(".highlight").forEach(el => {
+      const text = el.textContent;
+      const parent = el.parentNode;
+      parent.replaceChild(document.createTextNode(text), el);
+      parent.normalize();
+    });
+  }
+
+  function filterContent() {
+    removeHighlights();
+    const query = document.getElementById("searchInput").value.toLowerCase();
+    const resultsContainer = document.getElementById("searchResults");
+    resultsContainer.innerHTML = "";
+    resultsContainer.style.display = "none";
+
+    if (!query) return;
+
+    const walker = document.createTreeWalker(document.body, NodeFilter.SHOW_TEXT, null, false);
+    const matches = [];
+
+    while (walker.nextNode()) {
+      const node = walker.currentNode;
+      const text = node.nodeValue;
+      const lower = text.toLowerCase();
+
+      if (lower.includes(query) && node.parentNode.tagName !== "SCRIPT" && node.parentNode.tagName !== "STYLE") {
+        const parent = node.parentNode;
+        const index = lower.indexOf(query);
+
+        // Highlight in the page
+        const span = document.createElement("span");
+        span.className = "highlight";
+        span.textContent = text.substr(index, query.length);
+
+        const before = document.createTextNode(text.substr(0, index));
+        const after = document.createTextNode(text.substr(index + query.length));
+
+        const container = parent;
+        container.replaceChild(after, node);
+        container.insertBefore(span, after);
+        container.insertBefore(before, span);
+
+        // For search result panel
+        const result = {
+          snippet: text.substr(Math.max(0, index - 20), query.length + 40),
+          element: span
+        };
+        matches.push(result);
+      }
+    }
+
+    // Display results
+    if (matches.length > 0) {
+      resultsContainer.style.display = "block";
+      matches.forEach(match => {
+        const div = document.createElement("div");
+        div.className = "search-result";
+        div.textContent = "... " + match.snippet.trim() + " ...";
+        div.onclick = () => {
+          match.element.scrollIntoView({ behavior: "smooth", block: "center" });
+        };
+        resultsContainer.appendChild(div);
+      });
+    }
+  }
+</script>
 
 </body>
 </html>
