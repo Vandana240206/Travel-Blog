@@ -1,0 +1,384 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Gallery - Travel Diaries</title>
+  <style>
+    body {
+      font-family: Palatino;
+      line-height: 1.6;
+      background-color: #E6E6FA;
+      margin: 0;
+    }
+    header, footer {
+      background-color: #FFB6C1;
+      color: #fff;
+      padding: 10px;
+      text-align: center;
+    }
+    nav {
+      background-color: #808080;
+      text-align: center;
+      padding: 10px 0;
+      font-size: 20px;
+      position: relative;
+    }
+    nav a {
+       color: white;
+      margin: 0 15px;
+      text-decoration: none;
+      display: inline-block;
+      padding: 8px 15px;
+      transition: background-color 0.3s ease;
+    }
+	nav a:hover {
+      background-color: #FFB6C1;
+      color: #000;
+      border-radius: 5px;
+	  }
+    .search-icon {
+      cursor: pointer;
+      margin-left: 20px;
+      font-size: 20px;
+    }
+    #searchInput {
+      display: none;
+      padding: 6px;
+      margin-left: 10px;
+      border-radius: 5px;
+      border: 1px solid #ccc;
+      font-size: 16px;
+    }
+
+    .container {
+      max-width: 1000px;
+      margin: auto;
+      padding: 20px;
+      background-color: #fff;
+    }
+
+    h2 {
+      text-align: center;
+      color: #333;
+    }
+
+    .gallery-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 15px;
+    }
+
+    .gallery-item img {
+      width: 100%;
+      height: auto;
+      border-radius: 10px;
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+      cursor: pointer;
+    }
+
+    .gallery-item img:hover {
+      transform: scale(1.05);
+      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+    }
+
+    .caption {
+      text-align: center;
+      margin-top: 5px;
+      font-weight: bold;
+      color: #555;
+    }
+
+    @media (max-width: 768px) {
+      .gallery-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+      #searchInput {
+        width: 80%;
+        margin-top: 10px;
+      }
+    }
+
+    @media (max-width: 480px) {
+      .gallery-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    .lightbox {
+      display: none;
+      position: fixed;
+      z-index: 1000;
+      top: 0; left: 0;
+      width: 100vw;
+      height: 100vh;
+      background: rgba(0,0,0,0.9);
+      justify-content: center;
+      align-items: center;
+      flex-direction: column;
+    }
+
+    .lightbox img {
+      max-width: 90%;
+      max-height: 80%;
+      transition: transform 0.3s;
+    }
+
+    .lightbox-controls {
+      margin-top: 15px;
+      display: flex;
+      gap: 10px;
+      justify-content: center;
+    }
+
+    .lightbox-controls button {
+      padding: 10px 20px;
+      font-size: 16px;
+      background-color: #FFB6C1;
+      border: none;
+      color: white;
+      cursor: pointer;
+      border-radius: 8px;
+    }
+
+    #lightbox-caption {
+      color: white;
+      font-size: 24px;
+      font-weight: bold;
+      text-align: center;
+      margin-top: 20px;
+      max-width: 90%;
+      line-height: 1.4;
+    }
+
+    .close-btn {
+      position: absolute;
+      top: 10px;
+      right: 20px;
+      font-size: 30px;
+      color: white;
+      cursor: pointer;
+    }
+
+    .highlight {
+      background-color: yellow;
+    }
+
+    #searchResults {
+      display: none;
+      background: #fff;
+      border: 1px solid #ccc;
+      margin-top: 5px;
+      max-height: 200px;
+      overflow-y: auto;
+      border-radius: 5px;
+      padding: 5px;
+      position: absolute;
+      z-index: 1001;
+      width: 300px;
+    }
+
+    .search-result {
+      padding: 8px;
+      border-bottom: 1px solid #eee;
+      cursor: pointer;
+      font-size: 14px;
+      color: #333;
+    }
+
+    .search-result:hover {
+      background-color: #f0f0f0;
+    }
+
+    @media (max-width: 768px) {
+      #searchResults {
+        width: 90%;
+        position: relative;
+      }
+    }
+  </style>
+</head>
+<body>
+<header>
+  <h1>YOUR TRAVEL BUDDY</h1>
+  <h3>Travel blogs around INDIA</h3>
+</header>
+
+  <nav>
+    <a href="home check.html">Home</a>
+    <a href="destinations check.html">Destinations</a>
+    <a href="gallery check.html">Gallery</a>
+    <a href="tips check.html">Tips</a>
+    <a href="contact.html">Contact</a>
+    <span class="search-icon" onclick="toggleSearch()">🔍</span>
+    <input type="text" id="searchInput" placeholder="Search images..." onkeyup="filterContent()">
+    <div id="searchResults"></div>
+  </nav>
+
+
+<br>
+<div class="container">
+  <h2>Travel Gallery</h2>
+  <div class="gallery-grid" id="gallery">
+    <div class="gallery-item">
+      <img src="lake pichola.jpg" data-caption="Lake Pichola">
+      <p class="caption">Lake Pichola</p>
+    </div>
+    <div class="gallery-item">
+      <img src="jag mandir.jpg" data-caption="Jag Mandir">
+      <p class="caption">Jag Mandir</p>
+    </div>
+    <div class="gallery-item">
+      <img src="city palace.jpg" data-caption="City Palace">
+      <p class="caption">City Palace</p>
+    </div>
+    <div class="gallery-item">
+      <img src="eklingji mangir.jpg" data-caption="Eklingji Mandir">
+      <p class="caption">Eklingji Mandir</p>
+    </div>
+    <div class="gallery-item">
+      <img src="fateh sagar.jpg" data-caption="Fateh Sagar Lake">
+      <p class="caption">Fateh Sagar Lake</p>
+    </div>
+    <div class="gallery-item">
+      <img src="karni mata.jpg" data-caption="Karni Mata Ropeway">
+      <p class="caption">Karni Mata Ropeway</p>
+    </div>
+  </div>
+</div>
+
+<!-- Lightbox Viewer -->
+<div class="lightbox" id="lightbox">
+  <span class="close-btn" onclick="closeLightbox()">&times;</span>
+  <img id="lightbox-img" src="" alt="Preview">
+  <p id="lightbox-caption"></p>
+  <div class="lightbox-controls">
+    <button onclick="prevImage()">Previous</button>
+    <button onclick="zoomIn()">Zoom In</button>
+    <button onclick="zoomOut()">Zoom Out</button>
+    <button onclick="nextImage()">Next</button>
+  </div>
+</div>
+
+<footer>
+  <p>&copy; 2025 Travel Diaries. All rights reserved.</p>
+</footer>
+
+<script>
+  const images = document.querySelectorAll('#gallery img');
+  const lightbox = document.getElementById('lightbox');
+  const caption = document.getElementById('lightbox-caption');
+  const lightboxImg = document.getElementById('lightbox-img');
+  let currentIndex = 0;
+  let zoomLevel = 1;
+
+  images.forEach((img, index) => {
+    img.addEventListener('click', () => {
+      currentIndex = index;
+      showLightbox();
+    });
+  });
+
+  function showLightbox() {
+    lightbox.style.display = 'flex';
+    lightboxImg.src = images[currentIndex].src;
+    caption.textContent = images[currentIndex].getAttribute('data-caption');
+    lightboxImg.style.transform = `scale(${zoomLevel})`;
+  }
+
+  function closeLightbox() {
+    lightbox.style.display = 'none';
+    zoomLevel = 1;
+  }
+
+  function prevImage() {
+    currentIndex = (currentIndex - 1 + images.length) % images.length;
+    showLightbox();
+  }
+
+  function nextImage() {
+    currentIndex = (currentIndex + 1) % images.length;
+    showLightbox();
+  }
+
+  function zoomIn() {
+    zoomLevel += 0.2;
+    lightboxImg.style.transform = `scale(${zoomLevel})`;
+  }
+
+  function zoomOut() {
+    zoomLevel = Math.max(0.4, zoomLevel - 0.2);
+    lightboxImg.style.transform = `scale(${zoomLevel})`;
+  }
+
+  function toggleSearch() {
+    const input = document.getElementById("searchInput");
+    const results = document.getElementById("searchResults");
+    input.style.display = input.style.display === "inline-block" ? "none" : "inline-block";
+    results.style.display = "none";
+    input.focus();
+  }
+
+  function removeHighlights() {
+    document.querySelectorAll(".highlight").forEach(el => {
+      const text = el.textContent;
+      const parent = el.parentNode;
+      parent.replaceChild(document.createTextNode(text), el);
+      parent.normalize();
+    });
+  }
+
+  function filterContent() {
+    removeHighlights();
+    const query = document.getElementById("searchInput").value.toLowerCase();
+    const resultsContainer = document.getElementById("searchResults");
+    resultsContainer.innerHTML = "";
+    resultsContainer.style.display = "none";
+
+    if (!query) return;
+
+    const walker = document.createTreeWalker(document.body, NodeFilter.SHOW_TEXT, null, false);
+    const matches = [];
+
+    while (walker.nextNode()) {
+      const node = walker.currentNode;
+      const text = node.nodeValue;
+      const lower = text.toLowerCase();
+
+      if (lower.includes(query) && node.parentNode.tagName !== "SCRIPT" && node.parentNode.tagName !== "STYLE") {
+        const parent = node.parentNode;
+        const index = lower.indexOf(query);
+
+        const span = document.createElement("span");
+        span.className = "highlight";
+        span.textContent = text.substr(index, query.length);
+
+        const before = document.createTextNode(text.substr(0, index));
+        const after = document.createTextNode(text.substr(index + query.length));
+
+        parent.replaceChild(after, node);
+        parent.insertBefore(span, after);
+        parent.insertBefore(before, span);
+
+        const result = {
+          snippet: text.substr(Math.max(0, index - 20), query.length + 40),
+          element: span
+        };
+        matches.push(result);
+      }
+    }
+
+    if (matches.length > 0) {
+      resultsContainer.style.display = "block";
+      matches.forEach(match => {
+        const div = document.createElement("div");
+        div.className = "search-result";
+        div.textContent = "... " + match.snippet.trim() + " ...";
+        div.onclick = () => {
+          match.element.scrollIntoView({ behavior: "smooth", block: "center" });
+        };
+        resultsContainer.appendChild(div);
+      });
+    }
+  }
+</script>
+</body>
+</html>
