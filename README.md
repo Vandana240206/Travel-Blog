@@ -1,4 +1,4 @@
-👉 [Click here to visit the homepage](https://vandana240206.github.io/Travel-Blog/)
+👉 [Click here to visit the homepage](https://vandana240206.github.io/Travel-Blog/home.html)
 
 # 🌍 Travel Diaries – Travel Blog Website
 
