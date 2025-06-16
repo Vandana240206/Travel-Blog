@@ -262,122 +262,68 @@
   <p>&copy; 2025 Travel Diaries. All rights reserved.</p>
 </footer>
 
+
 <script>
-  const images = document.querySelectorAll('#gallery img');
-  const lightbox = document.getElementById('lightbox');
-  const caption = document.getElementById('lightbox-caption');
-  const lightboxImg = document.getElementById('lightbox-img');
-  let currentIndex = 0;
-  let zoomLevel = 1;
-
-  images.forEach((img, index) => {
-    img.addEventListener('click', () => {
-      currentIndex = index;
-      showLightbox();
-    });
-  });
-
-  function showLightbox() {
-    lightbox.style.display = 'flex';
-    lightboxImg.src = images[currentIndex].src;
-    caption.textContent = images[currentIndex].getAttribute('data-caption');
-    lightboxImg.style.transform = `scale(${zoomLevel})`;
-  }
-
-  function closeLightbox() {
-    lightbox.style.display = 'none';
-    zoomLevel = 1;
-  }
-
-  function prevImage() {
-    currentIndex = (currentIndex - 1 + images.length) % images.length;
-    showLightbox();
-  }
-
-  function nextImage() {
-    currentIndex = (currentIndex + 1) % images.length;
-    showLightbox();
-  }
-
-  function zoomIn() {
-    zoomLevel += 0.2;
-    lightboxImg.style.transform = `scale(${zoomLevel})`;
-  }
-
-  function zoomOut() {
-    zoomLevel = Math.max(0.4, zoomLevel - 0.2);
-    lightboxImg.style.transform = `scale(${zoomLevel})`;
-  }
-
   function toggleSearch() {
     const input = document.getElementById("searchInput");
     const results = document.getElementById("searchResults");
-    input.style.display = input.style.display === "inline-block" ? "none" : "inline-block";
-    results.style.display = "none";
-    input.focus();
+    if (input.style.display === "none") {
+      input.style.display = "inline-block";
+      input.focus();
+    } else {
+      input.style.display = "none";
+      results.style.display = "none";
+      input.value = "";
+      clearHighlights();
+    }
   }
 
-  function removeHighlights() {
-    document.querySelectorAll(".highlight").forEach(el => {
-      const text = el.textContent;
-      const parent = el.parentNode;
-      parent.replaceChild(document.createTextNode(text), el);
-      parent.normalize();
+  function clearHighlights() {
+    const highlighted = document.querySelectorAll(".highlight");
+    highlighted.forEach(span => {
+      const parent = span.parentNode;
+      parent.replaceChild(document.createTextNode(span.textContent), span);
+      parent.normalize(); // Merge adjacent text nodes
     });
   }
 
   function filterContent() {
-    removeHighlights();
-    const query = document.getElementById("searchInput").value.toLowerCase();
-    const resultsContainer = document.getElementById("searchResults");
-    resultsContainer.innerHTML = "";
-    resultsContainer.style.display = "none";
+    const searchValue = document.getElementById("searchInput").value.toLowerCase();
+    clearHighlights();
 
-    if (!query) return;
+    if (!searchValue) {
+      document.getElementById("searchResults").style.display = "none";
+      return;
+    }
 
-    const walker = document.createTreeWalker(document.body, NodeFilter.SHOW_TEXT, null, false);
-    const matches = [];
+    const resultsBox = document.getElementById("searchResults");
+    resultsBox.innerHTML = '';
+    let matchesFound = 0;
 
-    while (walker.nextNode()) {
-      const node = walker.currentNode;
-      const text = node.nodeValue;
-      const lower = text.toLowerCase();
+    const visibleElements = document.querySelectorAll(".container article, .container p, .container h2, .container h3, .container table");
 
-      if (lower.includes(query) && node.parentNode.tagName !== "SCRIPT" && node.parentNode.tagName !== "STYLE") {
-        const parent = node.parentNode;
-        const index = lower.indexOf(query);
-
-        const span = document.createElement("span");
-        span.className = "highlight";
-        span.textContent = text.substr(index, query.length);
-
-        const before = document.createTextNode(text.substr(0, index));
-        const after = document.createTextNode(text.substr(index + query.length));
-
-        parent.replaceChild(after, node);
-        parent.insertBefore(span, after);
-        parent.insertBefore(before, span);
-
-        const result = {
-          snippet: text.substr(Math.max(0, index - 20), query.length + 40),
-          element: span
-        };
-        matches.push(result);
+    visibleElements.forEach(el => {
+      if (el.offsetParent !== null) {  // Ensures only visible elements are searched
+        const text = el.textContent.toLowerCase();
+        if (text.includes(searchValue)) {
+          highlightMatch(el, searchValue);
+          const snippet = el.textContent.trim().substring(0, 100);
+          const div = document.createElement("div");
+          div.className = "search-result";
+          div.textContent = snippet + "...";
+          div.onclick = () => el.scrollIntoView({ behavior: "smooth" });
+          resultsBox.appendChild(div);
+          matchesFound++;
+        }
       }
-    }
+    });
 
-    if (matches.length > 0) {
-      resultsContainer.style.display = "block";
-      matches.forEach(match => {
-        const div = document.createElement("div");
-        div.className = "search-result";
-        div.textContent = "... " + match.snippet.trim() + " ...";
-        div.onclick = () => {
-          match.element.scrollIntoView({ behavior: "smooth", block: "center" });
-        };
-        resultsContainer.appendChild(div);
-      });
-    }
+    resultsBox.style.display = matchesFound > 0 ? "block" : "none";
+  }
+
+  function highlightMatch(element, keyword) {
+    const regex = new RegExp(`(${keyword})`, 'gi');
+    element.innerHTML = element.innerHTML.replace(regex, '<span class="highlight">$1</span>');
   }
 </script>
 </body>
