@@ -166,6 +166,69 @@ My page will include :
   <input type="text" id="searchInput" placeholder="Search images..." onkeyup="filterImages()">
 </nav><br>
 
+	<script>
+  function toggleSearch() {
+    const searchInput = document.getElementById("searchInput");
+    searchInput.style.display = searchInput.style.display === "inline-block" ? "none" : "inline-block";
+    if (searchInput.style.display === "inline-block") {
+      searchInput.focus();
+    } else {
+      removeHighlights();
+    }
+  }
+
+  function filterImages() {
+    const term = document.getElementById("searchInput").value.trim();
+    removeHighlights();
+
+    if (!term) return;
+
+    const walker = document.createTreeWalker(document.body, NodeFilter.SHOW_TEXT, {
+      acceptNode: function(node) {
+        // Ignore invisible elements
+        const parent = node.parentNode;
+        if (!parent || !parent.offsetParent) return NodeFilter.FILTER_REJECT;
+        if (['SCRIPT', 'STYLE', 'NOSCRIPT'].includes(parent.tagName)) return NodeFilter.FILTER_REJECT;
+        if (!node.nodeValue.trim()) return NodeFilter.FILTER_REJECT;
+        return NodeFilter.FILTER_ACCEPT;
+      }
+    });
+
+    const nodesToHighlight = [];
+    while (walker.nextNode()) {
+      const node = walker.currentNode;
+      if (node.nodeValue.toLowerCase().includes(term.toLowerCase())) {
+        nodesToHighlight.push(node);
+      }
+    }
+
+    nodesToHighlight.forEach((node, index) => {
+      const span = document.createElement("span");
+      const regex = new RegExp(`(${escapeRegExp(term)})`, "gi");
+      const highlightedHTML = node.nodeValue.replace(regex, '<span class="highlight">$1</span>');
+      const wrapper = document.createElement("span");
+      wrapper.innerHTML = highlightedHTML;
+      node.parentNode.replaceChild(wrapper, node);
+    });
+
+    const firstHighlight = document.querySelector(".highlight");
+    if (firstHighlight) {
+      firstHighlight.scrollIntoView({ behavior: "smooth", block: "center" });
+    }
+  }
+
+  function removeHighlights() {
+    document.querySelectorAll("span.highlight").forEach(span => {
+      const parent = span.parentNode;
+      parent.replaceChild(document.createTextNode(span.textContent), span);
+      parent.normalize(); // merge adjacent text nodes
+    });
+  }
+
+  function escapeRegExp(string) {
+    return string.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+  }
+</script>
 </body>
 </html>
 
