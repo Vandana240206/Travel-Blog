@@ -272,5 +272,88 @@
 	<ul>
 	<li>ZERO STRESS, ONLY VIBES.</li></ul>
 	</div>
+
+	<script>
+  let matches = [];
+  let currentMatchIndex = -1;
+
+  function toggleSearch() {
+    const input = document.getElementById("searchInput");
+    const count = document.getElementById("matchCount");
+
+    const shouldShow = input.style.display !== "inline-block";
+
+    input.style.display = shouldShow ? "inline-block" : "none";
+    count.style.display = shouldShow ? "inline-block" : "none";
+    prevBtn.style.display = shouldShow ? "inline-block" : "none";
+    nextBtn.style.display = shouldShow ? "inline-block" : "none";
+
+    if (shouldShow) {
+      input.focus();
+    } else {
+      clearHighlights();
+    }
+  }
+
+  function clearHighlights() {
+    matches.forEach(el => el.outerHTML = el.innerText);
+    matches = [];
+    currentMatchIndex = -1;
+    updateMatchCount();
+  }
+
+  function filterContent() {
+    clearHighlights();
+
+    const searchValue = document.getElementById("searchInput").value.trim().toLowerCase();
+    const content = document.querySelector(".container");
+    const elements = content.querySelectorAll("h1, h2, li, p, ul, ol");
+
+    if (!searchValue) return;
+
+    elements.forEach(el => {
+      const regex = new RegExp(`(${searchValue})`, "ig");
+      if (regex.test(el.textContent)) {
+        el.innerHTML = el.textContent.replace(regex, '<span class="highlight">$1</span>');
+      }
+    });
+
+    matches = Array.from(document.querySelectorAll(".highlight"));
+    if (matches.length > 0) {
+      currentMatchIndex = 0;
+      scrollToMatch(currentMatchIndex);
+    }
+    updateMatchCount();
+  }
+
+  function scrollToMatch(index) {
+    if (matches.length > 0 && matches[index]) {
+      matches[index].scrollIntoView({ behavior: "smooth", block: "center" });
+      matches.forEach(el => el.style.outline = "none");
+      matches[index].style.outline = "2px solid red";
+    }
+  }
+
+  function navigateMatch(direction) {
+    if (matches.length === 0) return;
+
+    currentMatchIndex += direction;
+    if (currentMatchIndex < 0) currentMatchIndex = matches.length - 1;
+    else if (currentMatchIndex >= matches.length) currentMatchIndex = 0;
+
+    scrollToMatch(currentMatchIndex);
+    updateMatchCount();
+  }
+
+  function updateMatchCount() {
+    const count = document.getElementById("matchCount");
+    if (matches.length === 0) {
+      count.textContent = "";
+    } else {
+      count.textContent = `${currentMatchIndex + 1} of ${matches.length}`;
+    }
+  }
+</script>
+
 </body>
 </html>
