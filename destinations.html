@@ -234,26 +234,56 @@
 </footer>
 
 <script>
-function postComment() {
-  const name = document.getElementById("nameInput").value.trim();
-  const commentText = document.getElementById("commentInput").value.trim();
-  if (name === "" || commentText === "") {
-    alert("Please fill in both name and comment.");
+function loadComments(formId, sectionId) {
+  const comments = JSON.parse(localStorage.getItem(sectionId)) || [];
+  const commentSection = document.getElementById(sectionId);
+  commentSection.innerHTML = "";
+
+  comments.forEach(c => {
+    const commentDiv = document.createElement("div");
+    commentDiv.innerHTML = `<strong>${c.name}</strong>: ${c.text}`;
+    commentSection.appendChild(commentDiv);
+  });
+}
+
+// Utility function to post a comment and save to localStorage
+function postComment(formId, nameId, commentId, sectionId) {
+  const name = document.getElementById(nameId).value.trim();
+  const text = document.getElementById(commentId).value.trim();
+
+  if (!name || !text) {
+    alert("Please enter both name and comment.");
     return;
   }
 
-  const comment = document.createElement("div");
-  comment.className = "comment";
+  const comment = { name: name, text: text };
 
-  comment.innerHTML = `<strong>${name}</strong>: ${commentText}`;
+  let comments = JSON.parse(localStorage.getItem(sectionId)) || [];
+  comments.push(comment);
+  localStorage.setItem(sectionId, JSON.stringify(comments));
 
-  document.getElementById("commentsSection").appendChild(comment);
+  document.getElementById(nameId).value = "";
+  document.getElementById(commentId).value = "";
 
-  // Clear the form
-  document.getElementById("nameInput").value = "";
-  document.getElementById("commentInput").value = "";
+  loadComments(formId, sectionId);
 }
-</script>
+
+// Initialize comment systems for multiple articles
+document.addEventListener("DOMContentLoaded", () => {
+  loadComments("form1", "comments1");
+  loadComments("form2", "comments2");
+
+  document.getElementById("form1").addEventListener("submit", (e) => {
+    e.preventDefault();
+    postComment("form1", "name1", "comment1", "comments1");
+  });
+
+  document.getElementById("form2").addEventListener("submit", (e) => {
+    e.preventDefault();
+    postComment("form2", "name2", "comment2", "comments2");
+  });
+});
+
 
 
 
