@@ -315,10 +315,25 @@ function postComment() {
     resultsBox.style.display = matchesFound > 0 ? "block" : "none";
   }
 
-  function highlightMatch(element, keyword) {
-    const regex = new RegExp(`(${keyword})`, 'gi');
-    element.innerHTML = element.innerHTML.replace(regex, '<span class="highlight">$1</span>');
+ function highlightMatch(element, keyword) {
+  const regex = new RegExp(`(${keyword})`, 'gi');
+
+  function recurse(node) {
+    if (node.nodeType === Node.TEXT_NODE) {
+      const match = node.nodeValue.match(regex);
+      if (match) {
+        const span = document.createElement('span');
+        span.innerHTML = node.nodeValue.replace(regex, '<span class="highlight">$1</span>');
+        node.parentNode.replaceChild(span, node);
+      }
+    } else if (node.nodeType === Node.ELEMENT_NODE && node.childNodes) {
+      Array.from(node.childNodes).forEach(recurse);
+    }
   }
+
+  recurse(element);
+}
+
 </script>
 
 
